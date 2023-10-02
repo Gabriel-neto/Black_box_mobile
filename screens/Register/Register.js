@@ -1,5 +1,6 @@
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
 
 import styles from '../../styles/login/Style';
 
@@ -30,6 +31,7 @@ const Register = ({ navigation }) => {
         />
 
         <TextInput style={styles.input} placeholder="Senha" secureTextEntry />
+
         <TextInput
           style={styles.input}
           placeholder="Confirmar senha"
@@ -38,9 +40,9 @@ const Register = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => console.log('Botão pressionado')}>
+          onPress={() => navigation.navigate('Main')}>
           <Text style={styles.buttonText}>Cadastrar</Text>
-          <IconButton icon="arrow-right" color="white" size={20} />
+          <FontAwesome name="arrow-right" size={15} color="white"/>
         </TouchableOpacity>
 
         <Text style={styles.titleCadastro}>Já tem conta?</Text>

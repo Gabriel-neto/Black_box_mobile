@@ -13,37 +13,25 @@ const LoginStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.secondary,
+    paddingHorizontal: 25,
   },
   content: {
-    paddingHorizontal: 25,
-    marginTop: '-20%',
+    flex: 5,
+  },
+  contentImage: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
-    width: '100%',
-    marginHorizontal: 'auto',
+    width: 150,
+    height: 150,
+    textAlign: 'center',
   },
   title: {
-    fontSize: 27,
-    fontWeight: 'bold',
-  },
-  titleRegister: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  titleBlackbox: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: COLORS.primary,
-  },
-  titleBlackboxRegister: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: COLORS.primary,
-    marginBottom: 20,
-  },
-  titleApresentacao: {
     fontSize: 25,
-    marginBottom: 35,
+    fontWeight: 'bold',
+    marginBottom: 40,
   },
   input: {
     width: '100%',
@@ -57,7 +45,7 @@ const LoginStyles = StyleSheet.create({
   },
   button: {
     borderRadius: 50,
-    marginTop: 30,
+    marginTop: 20,
     backgroundColor: COLORS.primary,
     height: 50,
     justifyContent: 'center',
@@ -67,20 +55,21 @@ const LoginStyles = StyleSheet.create({
   buttonText: {
     color: COLORS.textLight,
     fontSize: 24,
-    marginEnd: 15,
   },
-  titleCadastro: {
-    textAlign: 'center',
-    fontSize: 16,
-    marginTop: 50,
+  buttonSair: {
+    borderRadius: 50,
+    backgroundColor: '#b23b3b',
+    width: '50%',
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    margin: 'auto',
   },
-  titleCadastro1: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: COLORS.primary,
+  buttonTextSair: {
+    color: COLORS.textLight,
+    fontSize: 18,
   },
-  
 });
 
 export default LoginStyles;

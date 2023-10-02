@@ -1,6 +1,6 @@
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import styles from '../../styles/login/Style';
-import { IconButton } from 'react-native-paper';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 // component
 const Login = ({ navigation }) => {
@@ -28,9 +28,9 @@ const Login = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => console.log('Botão pressionado')}>
+          onPress={() => navigation.navigate('Main')}>
           <Text style={styles.buttonText}>Entrar</Text>
-          <IconButton icon="arrow-right" color="white" size={20} />
+          <FontAwesome name="arrow-right" size={15} color="white"/>
         </TouchableOpacity>
 
         <Text style={styles.titleCadastro}>É o seu primeiro acesso?</Text>
