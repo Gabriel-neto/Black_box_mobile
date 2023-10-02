@@ -67,6 +67,7 @@ const LoginStyles = StyleSheet.create({
   buttonText: {
     color: COLORS.textLight,
     fontSize: 24,
+    marginEnd: 15,
   },
   titleCadastro: {
     textAlign: 'center',
@@ -79,6 +80,7 @@ const LoginStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLORS.primary,
   },
+  
 });
 
 export default LoginStyles;
