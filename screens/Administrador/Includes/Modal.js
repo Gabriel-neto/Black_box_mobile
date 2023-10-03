@@ -1,6 +1,8 @@
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const AppModal = ({ visible, onClose, Texto }) => {
+
+const AppModal = ({ visible, onClose}) => {
   return (
     <Modal
       animationType="fade"
@@ -9,17 +11,24 @@ const AppModal = ({ visible, onClose, Texto }) => {
       onRequestClose={onClose}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>{Texto}</Text>
+          <Text style={styles.modalText}>Tem certeza que deseja excluir esse item?</Text>
           <TouchableOpacity
             style={[styles.button, styles.buttonClose]}
             onPress={onClose}>
-            <Text style={styles.textStyle}>Fechar</Text>
+            <Text style={styles.textStyleClose}>Fechar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonDetele]}
+            onPress={onClose}>
+            <FontAwesome name="trash" style={styles.actionIcon}/>
+            <Text style={styles.textStyleDelete}>Excluir</Text>
           </TouchableOpacity>
         </View>
       </View>
     </Modal>
   );
 };
+
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -44,18 +53,40 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    borderColor: '#706E6E',
+    borderWidth: 1,
+    borderRadius: 4,
     marginTop: 20,
-    borderRadius: 20,
+    marginBottom: 10,
+    paddingHorizontal: 55,
   },
-  textStyle: {
-    color: 'white',
-    paddingHorizontal: 60,
+  buttonDetele:{
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#FE0000',
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingHorizontal: 50,
+  },
+  textStyleClose: {
+    color: '#706E6E',
+    marginHorizontal: 10,
     paddingVertical: 13,
     fontSize: 16,
   },
+  textStyleDelete: {
+    color: '#FE0000',
+    marginHorizontal: 10,
+    paddingVertical: 13,
+    fontSize: 16,
+  },
+  actionIcon: {
+    fontSize: 20,
+    color: '#FE0000',
+  },
   modalText: {
-    marginBottom: 15,
+    marginBottom: 10,
     textAlign: 'center',
   },
 });
