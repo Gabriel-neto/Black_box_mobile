@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import AppModal from '../../Includes/Modal'
 
 
-const Item = () => {
+const Item = ({ produto, quantidade, onDelete }) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -24,7 +24,6 @@ const Item = () => {
       borderBottomWidth: 1,
       borderColor: '#E0E0E0',
       paddingVertical: 15,
-      marginHorizontal: 16,
     },
     produto: {
       fontSize: 20,
@@ -77,10 +76,10 @@ const Item = () => {
     <GestureHandlerRootView>
       <Swipeable
         renderRightActions={renderApagarButton}>
-        <View style={styles.item} onPress={()=>{}}>
-          <Text style={styles.produto}>Camiseta Branca</Text>
-          <Text style={styles.qtd}>100 unidades</Text>
-        </View>
+        <TouchableOpacity style={styles.item} onPress={()=>{}}>
+          <Text style={styles.produto}>{produto}</Text>
+          <Text style={styles.qtd}>{quantidade}</Text>
+        </TouchableOpacity>
       </Swipeable>
         {isModalVisible && <AppModal visible={isModalVisible} onClose={closeModal} />}
     </GestureHandlerRootView>

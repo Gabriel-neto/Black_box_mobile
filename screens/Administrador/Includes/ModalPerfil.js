@@ -1,7 +1,6 @@
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const AppModal = ({ visible, onClose, onConfirm }) => {
+const AppModal = ({ visible, onClose, Texto }) => {
   return (
     <Modal
       animationType="fade"
@@ -11,21 +10,12 @@ const AppModal = ({ visible, onClose, onConfirm }) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>
-            Tem certeza que deseja excluir esse item?
+            {Texto}
           </Text>
           <TouchableOpacity
             style={[styles.button, styles.buttonClose]}
             onPress={onClose}>
             <Text style={styles.textStyleClose}>Fechar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, styles.buttonDetele]}
-            onPress={() => {
-              onConfirm && onConfirm();
-              onClose();
-            }}>
-            <FontAwesome name="trash" style={styles.actionIcon} />
-            <Text style={styles.textStyleDelete}>Excluir</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -63,30 +53,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 55,
   },
-  buttonDetele: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#FE0000',
-    borderWidth: 1,
-    borderRadius: 4,
-    paddingHorizontal: 50,
-  },
   textStyleClose: {
     color: '#706E6E',
     marginHorizontal: 10,
     paddingVertical: 13,
     fontSize: 16,
-  },
-  textStyleDelete: {
-    color: '#FE0000',
-    marginHorizontal: 10,
-    paddingVertical: 13,
-    fontSize: 16,
-  },
-  actionIcon: {
-    fontSize: 20,
-    color: '#FE0000',
   },
   modalText: {
     marginBottom: 10,

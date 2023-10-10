@@ -4,7 +4,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../../../../styles/perfil/Style';
 import { useNavigation } from '@react-navigation/native';
-import AppModal from '../../Includes/Modal';
+import AppModal from '../../Includes/ModalPerfil';
 
 const Perfil = () => {
   const navigation = useNavigation();
