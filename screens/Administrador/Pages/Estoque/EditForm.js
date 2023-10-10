@@ -109,6 +109,7 @@ const EditProductForm = ({ product, onSave }) => {
       <TextInput
         placeholder="Quantidade"
         style={styles.input}
+        keyboardType="numeric"
         value={quantidadeDoProduto}
         onChangeText={(text) => setQuantidadeDoProduto(text)}
       />
@@ -118,6 +119,7 @@ const EditProductForm = ({ product, onSave }) => {
       <TextInput
         placeholder="Preço de Custo"
         style={styles.input}
+        keyboardType="numeric"
         value={precoDoProduto}
         onChangeText={(text) => setPrecoDoProduto(text)}
       />
@@ -126,6 +128,7 @@ const EditProductForm = ({ product, onSave }) => {
       <TextInput
         placeholder="Preço de Venda"
         style={styles.input}
+        keyboardType="numeric"
         value={precoVendaDoProduto}
         onChangeText={(text) => {
           setPrecoVendaDoProduto(text);
