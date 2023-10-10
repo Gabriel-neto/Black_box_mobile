@@ -15,8 +15,8 @@ const LoginStyles = StyleSheet.create({
     backgroundColor: COLORS.secondary,
   },
   content: {
-    paddingHorizontal: 25,
-    marginTop: '-20%',
+    paddingHorizontal: 16,
+    justifyContent: 'center',
   },
   image: {
     width: '100%',
@@ -24,26 +24,9 @@ const LoginStyles = StyleSheet.create({
   },
   title: {
     fontSize: 27,
-    fontWeight: 'bold',
-  },
-  titleRegister: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  titleBlackbox: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: COLORS.primary,
-  },
-  titleBlackboxRegister: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: COLORS.primary,
-    marginBottom: 20,
-  },
-  titleApresentacao: {
-    fontSize: 25,
-    marginBottom: 35,
+    fontWeight: '400',
+    textAlign: 'center',
+    padding: 0,
   },
   input: {
     width: '100%',
@@ -54,10 +37,13 @@ const LoginStyles = StyleSheet.create({
     color: COLORS.textDark,
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    marginTop: 50,
+    textAlign: 'center'
+
   },
   button: {
     borderRadius: 50,
-    marginTop: 30,
+    marginTop: 20,
     backgroundColor: COLORS.primary,
     height: 50,
     justifyContent: 'center',
@@ -69,22 +55,15 @@ const LoginStyles = StyleSheet.create({
     fontSize: 24,
     marginEnd: 15,
   },
-  titleCadastro: {
-    textAlign: 'center',
-    fontSize: 16,
-    marginTop: 50,
-  },
-  titleCadastro1: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: 'bold',
+  cancelar: {
+    backgroundColor: 'white',
+    borderRadius: 50,
     color: COLORS.primary,
-  },
-  recSenha: {
     textAlign: 'center',
-    color: COLORS.primary,
-  }
-  
+    fontSize: 24,
+    marginTop: 20,
+    paddingVertical: 10,
+  },
 });
 
 export default LoginStyles;

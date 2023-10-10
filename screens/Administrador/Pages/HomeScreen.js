@@ -147,13 +147,22 @@ const AppContainer = () => {
           </ScrollView>
         </View>
       )}
-      <FAB
-        icon="plus"
-        color="#0D5C63"
-        style={styles.fab}
-        onPress={() => setIsFormVisible(true)}
-      />
-      <View>
+      {!isFormVisible ? (
+        <FAB
+          icon="plus"
+          color="#0D5C63"
+          style={styles.fab}
+          onPress={() => setIsFormVisible(true)}
+        />
+      ) : null}
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 10,
+          left: 16,
+          right: 16,
+          paddingVertical: 16,
+        }}>
         <SnackBar
           visible={visibleSnackbar}
           onDismiss={() => setVisibleSnackbar(false)}
