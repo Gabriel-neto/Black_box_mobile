@@ -1,6 +1,7 @@
 import React from 'react';
 import { BottomNavigation } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import {StyleSheet} from 'react-native'
 
 //PAGINAS
 import HomeScreen from './Pages/HomeScreen';
@@ -12,19 +13,19 @@ const Main = () => {
   const [routes] = React.useState([
     {
       key: 'estoque',
-      title: 'Estoque',
+      title: 'ESTOQUE',
       focusedIcon: 'list',
       unfocusedIcon: 'list',
     },
     {
       key: 'relatorios',
-      title: 'Relatorios',
+      title: 'RELATÓRIOS',
       focusedIcon: 'trello',
       unfocusedIcon: 'trello',
     },
     {
       key: 'perfil',
-      title: 'Perfil',
+      title: 'PERFIL',
       focusedIcon: 'user',
       unfocusedIcon: 'user',
     },
@@ -41,9 +42,11 @@ const Main = () => {
       (r) => r.key === route.key
     );
     const iconName = focused ? focusedIcon : unfocusedIcon;
-    const color = focused ? '#0D5C63' : '#ccc';
-    return <FontAwesome name={iconName} size={24} color={color} />;
+    const color = focused ? '#0D5C63' : '#BDBDBD';
+    return <FontAwesome style={styles.icon} name={iconName} size={24} color={color} />;
   };
+
+  
 
   return (
     <BottomNavigation
@@ -52,8 +55,20 @@ const Main = () => {
       renderScene={renderScene}
       renderIcon={renderIcon}
       inactiveColor="#ccc"
+      barStyle={styles.bottomNavigation}
     />
+
+    
   );
 };
+const styles = StyleSheet.create({
+  bottomNavigation: {
+    backgroundColor: 'white',
+    padding: 10,
+  },
+  icon: {
+    fontWeight: 500,
+  }
+});
 
 export default Main;
