@@ -79,7 +79,7 @@ const AppContainer = () => {
   return (
     <View style={styles.container}>
       {isFormVisible ? (
-        <ScrollView>
+        <View>
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => {
@@ -93,6 +93,7 @@ const AppContainer = () => {
               {selectedProduct ? "Editar Produto" : "Adicionar Produto"}
             </Text>
           </View>
+          <ScrollView>
           {selectedProduct ? <EditProductForm /> : <ProductForm />}
           {selectedProduct ? (
             <TouchableOpacity
@@ -101,7 +102,7 @@ const AppContainer = () => {
                 addNewProduct();
               }}
             >
-              <Text style={styles.buttonText}>ADICIONAR</Text>
+              <Text style={styles.buttonText}>SALVAR</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
@@ -110,10 +111,11 @@ const AppContainer = () => {
                 updateProduct();
               }}
             >
-              <Text style={styles.buttonText}>Salvar</Text>
+              <Text style={styles.buttonText}>ADICIONAR</Text>
             </TouchableOpacity>
           )}
-        </ScrollView>
+          </ScrollView>
+        </View>
       ) : (
         <View>
           <Text style={styles.titulo}>Lista de Produtos</Text>

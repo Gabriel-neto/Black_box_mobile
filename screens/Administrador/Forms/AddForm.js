@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../../../styles/administrador/ListaProdutos';
 
 const ProductForm = () => {
@@ -7,7 +7,7 @@ const ProductForm = () => {
     }
 
   return (
-    <View>
+    <ScrollView>
       <TextInput
         placeholder="Nome do Produto"
         style={styles.input}
@@ -37,7 +37,7 @@ const ProductForm = () => {
         onChangeText={() => {}}
       />
       
-    </View>
+    </ScrollView>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, ScrollView, View, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default class DetailsScreen extends React.Component {
   render() {
@@ -75,6 +75,7 @@ export default class DetailsScreen extends React.Component {
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>{'Relatório\n de Vendas'}</Text>
+      <ScrollView>
       <View style={styles.dados}>
         <Text style={styles.pc}>356</Text>
         <Text style={styles.pcDescription}>Produtos Cadastrados</Text>
@@ -99,6 +100,7 @@ export default class DetailsScreen extends React.Component {
         </Text>
         <Text style={styles.lpvDescription}>Lucro p/ Venda</Text>
       </View>
+      </ScrollView>
     </View>
   );
   }

@@ -95,7 +95,8 @@ const ListaProdutosStyles = StyleSheet.create({
   },
   button: {
     borderRadius: 50,
-    marginTop: 50,
+    marginTop: 30,
+    marginBottom: 125,
     backgroundColor: '#0D5C63',
     height: 50,
     justifyContent: 'center',

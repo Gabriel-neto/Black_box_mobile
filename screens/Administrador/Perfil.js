@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
+import { View, ScrollView, Text, TextInput, Image, TouchableOpacity } from "react-native";
 
 import styles from "../../styles/perfil/Style";
 import { useNavigation } from "@react-navigation/native";
@@ -11,22 +11,13 @@ const Perfil = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.contentImage}>
         <Image
           source={require("../../assets/img/perfil/foto_perfil.png")}
           style={styles.image}
         />
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View
-            style={{
-              flex: 1,
-              height: 1,
-              backgroundColor: "#ccc",
-              marginTop: 30,
-            }}
-          />
-        </View>
+        
       </View>
 
       <View style={styles.content}>
@@ -79,7 +70,7 @@ const Perfil = () => {
           onClose={() => setModalVisible(false)}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

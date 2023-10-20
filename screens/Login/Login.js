@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import styles from '../../styles/login/Style';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -9,7 +9,7 @@ const Login = ({ navigation }) => {
   };
   return (
     
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image
         source={require('../../assets/img/login/login_topo_cinza.png')}
         style={styles.image}
@@ -54,7 +54,7 @@ const Login = ({ navigation }) => {
           <Text style={styles.titleCadastro1}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

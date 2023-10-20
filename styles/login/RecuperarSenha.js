@@ -13,6 +13,7 @@ const LoginStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.secondary,
+    
   },
   content: {
     paddingHorizontal: 16,
