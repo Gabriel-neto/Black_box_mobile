@@ -25,7 +25,7 @@ export default class DetailsScreen extends React.Component {
     pc: {
       paddingTop: 20,
       color: '#0D5C63',
-      fontWeight: '350',
+      fontWeight: '400',
       fontSize: 60,
       lineHeight: 50,
     },

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
 
-import styles from '../../../../styles/perfil/Style';
-import { useNavigation } from '@react-navigation/native';
-import AppModal from '../../Includes/ModalPerfil';
+import styles from "../../styles/perfil/Style";
+import { useNavigation } from "@react-navigation/native";
+import AppModal from "./Includes/ModalPerfil";
 
 const Perfil = () => {
   const navigation = useNavigation();
@@ -14,15 +14,15 @@ const Perfil = () => {
     <View style={styles.container}>
       <View style={styles.contentImage}>
         <Image
-          source={require('../../../../assets/img/perfil/foto_perfil.png')}
+          source={require("../../assets/img/perfil/foto_perfil.png")}
           style={styles.image}
         />
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View
             style={{
               flex: 1,
               height: 1,
-              backgroundColor: '#ccc',
+              backgroundColor: "#ccc",
               marginTop: 30,
             }}
           />
@@ -35,7 +35,7 @@ const Perfil = () => {
         <TextInput
           style={styles.input}
           placeholder="Nome"
-          keyboardType="text"
+          keyboardType="default"
         />
 
         <TextInput
@@ -47,25 +47,27 @@ const Perfil = () => {
         <TextInput
           style={styles.input}
           placeholder="Empresa"
-          keyboardType="text"
+          keyboardType="default"
         />
 
         <TextInput
           style={styles.input}
           placeholder="CNPJ"
-          keyboardType="text"
+          keyboardType="default"
         />
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setModalVisible(true)}>
+          onPress={() => setModalVisible(true)}
+        >
           <Text style={styles.buttonText}>Salvar perfil</Text>
         </TouchableOpacity>
 
         <View style={styles.contentImage}>
           <TouchableOpacity
             style={styles.buttonSair}
-            onPress={() => navigation.navigate('Login')}>
+            onPress={() => navigation.navigate("Login")}
+          >
             <Text style={styles.buttonTextSair}>Sair</Text>
           </TouchableOpacity>
         </View>
@@ -76,7 +78,6 @@ const Perfil = () => {
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
         />
-
       </View>
     </View>
   );
