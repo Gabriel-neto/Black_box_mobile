@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 
@@ -7,14 +7,14 @@ import styles from '../../styles/login/Style';
 // component
 const Register = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image
         source={require('../../assets/img/login/register_img.png')}
         style={styles.image}
       />
       <View style={styles.content}>
         <Text style={styles.titleRegister}>
-          Organize seu{'\n'}negocio e tornese um
+          Organize seu{'\n'}negócio e torne-se um
         </Text>
         <Text style={styles.titleBlackboxRegister}>Blackbox!</Text>
 
@@ -26,7 +26,7 @@ const Register = ({ navigation }) => {
 
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="E-mail"
           keyboardType="email-adress"
         />
 
@@ -34,7 +34,7 @@ const Register = ({ navigation }) => {
 
         <TextInput
           style={styles.input}
-          placeholder="Confirmar senha"
+          placeholder="Confirme sua senha"
           secureTextEntry
         />
 
@@ -51,7 +51,7 @@ const Register = ({ navigation }) => {
           <Text style={styles.titleCadastro1}>Faça login</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

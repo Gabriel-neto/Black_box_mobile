@@ -1,11 +1,11 @@
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import styles from '../../styles/login/RecuperarSenha';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 // component
 const RecuperarSenha = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image
         source={require('../../assets/img/login/login_topo_cinza.png')}
         style={styles.image}
@@ -25,11 +25,11 @@ const RecuperarSenha = ({ navigation }) => {
           <FontAwesome name="arrow-right" size={15} color="white" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity style={{marginBottom:30}} onPress={() => navigation.navigate('Login')}>
           <Text style={styles.cancelar}>Cancelar</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

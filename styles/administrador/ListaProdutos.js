@@ -87,6 +87,26 @@ const ListaProdutosStyles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  input: {
+    fontSize: 20,
+    borderBottomWidth: 1,
+    borderColor: '#C8C7C7',
+    paddingVertical: 15,
+  },
+  button: {
+    borderRadius: 50,
+    marginTop: 30,
+    marginBottom: 125,
+    backgroundColor: '#0D5C63',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  buttonText: {
+    color: '#FFF',
+    fontWeight: '600',
+  },
 });
 
 export default ListaProdutosStyles;

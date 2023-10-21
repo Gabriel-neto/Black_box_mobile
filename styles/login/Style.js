@@ -75,6 +75,7 @@ const LoginStyles = StyleSheet.create({
     marginTop: 50,
   },
   titleCadastro1: {
+    marginBottom: 10,
     textAlign: 'center',
     fontSize: 22,
     fontWeight: 'bold',

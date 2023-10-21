@@ -13,7 +13,9 @@ const LoginStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.secondary,
-    paddingHorizontal: 25,
+    paddingHorizontal: 16,
+    paddingTop: 40,
+
   },
   content: {
     flex: 5,
@@ -22,11 +24,11 @@ const LoginStyles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 20,
   },
   image: {
     width: 150,
     height: 150,
-    textAlign: 'center',
   },
   title: {
     fontSize: 25,
@@ -45,7 +47,7 @@ const LoginStyles = StyleSheet.create({
   },
   button: {
     borderRadius: 50,
-    marginTop: 20,
+    marginVertical: 20,
     backgroundColor: COLORS.primary,
     height: 50,
     justifyContent: 'center',
@@ -57,16 +59,17 @@ const LoginStyles = StyleSheet.create({
     fontSize: 24,
   },
   buttonSair: {
+    paddingVertical: 10,
     borderRadius: 50,
     backgroundColor: '#b23b3b',
-    width: '50%',
-    height: 30,
+    width: '75%',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    margin: 'auto',
+    marginBottom: 40,
   },
   buttonTextSair: {
+    
     color: COLORS.textLight,
     fontSize: 18,
   },
