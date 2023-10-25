@@ -8,7 +8,7 @@ import HomeScreen from "../screens/Administrador/HomeScreen";
 import DetailsScreen from "../screens/Administrador/DetailsScreen";
 import Perfil from "../screens/Administrador/Perfil";
 
-const Main = () => {
+const InternalAccess = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {
@@ -54,6 +54,7 @@ const Main = () => {
   };
 
   return (
+    
     <BottomNavigation
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
@@ -74,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+export default InternalAccess;
