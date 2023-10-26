@@ -6,9 +6,13 @@ import styles from "../../styles/perfil/Style";
 import { useNavigation } from "@react-navigation/native";
 import AppModal from "./Includes/ModalPerfil";
 
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+
 const Perfil = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
+  const {user, logout} = useContext(AuthContext)
 
   return (
     <ScrollView style={styles.container}>
@@ -21,7 +25,7 @@ const Perfil = () => {
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title}>Bem-vindo Usuario...</Text>
+        <Text style={styles.title}>Bem-vindo {user.email}</Text>
 
         <TextInput
           style={styles.input}
@@ -57,7 +61,7 @@ const Perfil = () => {
         <View style={styles.contentImage}>
           <TouchableOpacity
             style={styles.buttonSair}
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => logout()}
           >
             <Text style={styles.buttonTextSair}>Sair</Text>
           </TouchableOpacity>

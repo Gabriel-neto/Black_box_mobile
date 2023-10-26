@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
-import { View, ScrollView, Text, TextInput, TouchableOpacity } from 'react-native';
-import styles from '../../../styles/administrador/ListaProdutos';
+import React, { useState, useContext } from "react";
+import {
+  View,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import styles from "../../../styles/administrador/ListaProdutos";
+import { ProductsContext } from "../../../contexts/ProductsContext";
 
 const ProductForm = () => {
-  const handleSubmit = () => {
-    }
+  const { products, addProduct, closeForm } = useContext(ProductsContext);
+  const [nome, setNome] = useState("");
+  const [qtd, setQtd] = useState();
+
+  const handleSubmit = () => {};
 
   return (
     <ScrollView>
       <TextInput
         placeholder="Nome do Produto"
         style={styles.input}
-        onChangeText={() => {}}
+        onChangeText={(text) => {setNome(text)}}
+        value={nome}
       />
       <TextInput
         placeholder="Marca"
@@ -22,7 +33,8 @@ const ProductForm = () => {
         placeholder="Quantidade"
         style={styles.input}
         keyboardType="numeric"
-        onChangeText={() => {}}
+        onChangeText={(text) => {setQtd(text)}}
+        value={qtd}
       />
       <TextInput
         placeholder="Preço de Custo"
@@ -36,7 +48,11 @@ const ProductForm = () => {
         keyboardType="numeric"
         onChangeText={() => {}}
       />
-      
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {addProduct(nome, qtd), console.log(nome, qtd), console.log(products), setNome(""), setQtd("")}}>
+        <Text style={styles.buttonText}>ADICIONAR</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

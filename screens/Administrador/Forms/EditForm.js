@@ -19,6 +19,7 @@ const EditProductForm = () => {
       <TextInput
         placeholder="Nome do Produto"
         style={styles.input}
+        value=''
         onChangeText={() => {}}
       />
 
@@ -46,6 +47,11 @@ const EditProductForm = () => {
         keyboardType="numeric"
         onChangeText={() => {}}
       />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {}}>
+        <Text style={styles.buttonText}>SALVAR</Text>
+      </TouchableOpacity>
     </View>
   );
 };

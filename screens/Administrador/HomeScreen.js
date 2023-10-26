@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ProductForm from "./Forms/AddForm";
 import EditProductForm from "./Forms/EditForm";
 
@@ -11,9 +11,14 @@ import { Swipeable } from "react-native-gesture-handler";
 import styles from "../../styles/administrador/ListaProdutos";
 import SnackBar from "./Includes/SnackBar";
 
+import { ProductsContext } from "../../contexts/ProductsContext";
+
+
+
 const AppContainer = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const { products, form, openForm, closeForm }  = useContext(ProductsContext)
+  const [isModalVisible, setIsModalVisible] = useState();
+  const [isFormVisible, setIsFormVisible] = useState();
   const [visibleSnackbar, setVisibleSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(false);
@@ -56,7 +61,7 @@ const AppContainer = () => {
   };
 
   const handleProductEdit = () => {
-    setIsFormVisible(true);
+    openForm();
   };
 
   const updateProduct = () => {
@@ -78,13 +83,13 @@ const AppContainer = () => {
 
   return (
     <View style={styles.container}>
-      {isFormVisible ? (
+      {form ? (
         <View>
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => {
                 setSelectedProduct(false);
-                setIsFormVisible(false);
+                closeForm()
               }}
             >
               <FontAwesome name="angle-left" style={styles.actionIcon} />
@@ -95,32 +100,14 @@ const AppContainer = () => {
           </View>
           <ScrollView>
           {selectedProduct ? <EditProductForm /> : <ProductForm />}
-          {selectedProduct ? (
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                addNewProduct();
-              }}
-            >
-              <Text style={styles.buttonText}>SALVAR</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                updateProduct();
-              }}
-            >
-              <Text style={styles.buttonText}>ADICIONAR</Text>
-            </TouchableOpacity>
-          )}
           </ScrollView>
         </View>
       ) : (
         <View>
           <Text style={styles.titulo}>Lista de Produtos</Text>
           <ScrollView>
-            <GestureHandlerRootView>
+          {products.map((products, index) => (
+            <GestureHandlerRootView key={index}>
               <Swipeable renderRightActions={() => renderApagarButton()}>
                 <TouchableOpacity
                   style={styles.item}
@@ -129,8 +116,8 @@ const AppContainer = () => {
                     setSelectedProduct(true);
                   }}
                 >
-                  <Text style={styles.produto}>Camisa Branca</Text>
-                  <Text style={getQtdColor()}>100 unidades</Text>
+                  <Text style={styles.produto}>{products.nome}</Text>
+                  <Text style={getQtdColor(products.qtd)}>{products.qtd} unidades</Text>
                 </TouchableOpacity>
               </Swipeable>
               {isModalVisible && (
@@ -141,15 +128,16 @@ const AppContainer = () => {
                 />
               )}
             </GestureHandlerRootView>
+            ))}
           </ScrollView>
         </View>
       )}
-      {!isFormVisible ? (
+      {!form ? (
         <FAB
           icon="plus"
           color="#0D5C63"
           style={styles.fab}
-          onPress={() => setIsFormVisible(true)}
+          onPress={() => openForm()}
         />
       ) : null}
       <View
