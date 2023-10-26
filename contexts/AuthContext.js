@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ logado: false });
+  const [user, setUser] = useState({ email: "", logado: false });
 
   const login = (email, senha) => {
     if (email !== "" && senha !== "") {

@@ -13,8 +13,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 // component
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState();
-  const [senha, setSenha] = useState();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const { login } = useContext(AuthContext);
   return (
     <ScrollView style={styles.container}>
@@ -33,6 +33,7 @@ const Login = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Email"
+          value={email}
           onChangeText={(text) => {
             setEmail(text);
           }}
@@ -41,6 +42,7 @@ const Login = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Senha"
+          value={senha}
           onChangeText={(text) => {
             setSenha(Text);
           }}
@@ -54,6 +56,7 @@ const Login = ({ navigation }) => {
           style={styles.button}
           onPress={() => {
             login(email, senha);
+            console.log(login.email)
           }}
         >
           <Text style={styles.buttonText}>Entrar</Text>

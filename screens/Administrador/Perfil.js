@@ -25,7 +25,7 @@ const Perfil = () => {
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title}>Bem-vindo Usuario...</Text>
+        <Text style={styles.title}>Bem-vindo {user.email}</Text>
 
         <TextInput
           style={styles.input}
