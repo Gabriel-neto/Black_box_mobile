@@ -8,7 +8,11 @@ import HomeScreen from "../screens/Administrador/HomeScreen";
 import DetailsScreen from "../screens/Administrador/DetailsScreen";
 import Perfil from "../screens/Administrador/Perfil";
 
+import { useContext } from "react";
+import { ProductsContext } from "../contexts/ProductsContext";
+
 const InternalAccess = () => {
+  const { reportProduct, closeForm } = useContext (ProductsContext);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {
@@ -57,7 +61,12 @@ const InternalAccess = () => {
     
     <BottomNavigation
       navigationState={{ index, routes }}
-      onIndexChange={setIndex}
+      onIndexChange={(newIndex) => {
+        setIndex(newIndex);
+        reportProduct();
+        closeForm();
+      }}
+      
       renderScene={renderScene}
       renderIcon={renderIcon}
       inactiveColor="#ccc"
