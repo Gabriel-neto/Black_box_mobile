@@ -13,12 +13,10 @@ import SnackBar from "./Includes/SnackBar";
 
 import { ProductsContext } from "../../contexts/ProductsContext";
 
-
-
 const AppContainer = () => {
-  const { products, form, openForm, closeForm }  = useContext(ProductsContext)
+  const { products, form, openForm, closeForm, findProduct, removeProduct} =
+    useContext(ProductsContext);
   const [isModalVisible, setIsModalVisible] = useState();
-  const [isFormVisible, setIsFormVisible] = useState();
   const [visibleSnackbar, setVisibleSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(false);
@@ -35,18 +33,20 @@ const AppContainer = () => {
 
   // BOTAO DE APAGAR
   const handleDeleteProduct = () => {
+    removeProduct(products)
     closeModal();
     setSnackbarMessage("Produto excluído com sucesso!");
     setVisibleSnackbar(true);
   };
 
-  const renderApagarButton = () => {
-    console.log();
+  const renderApagarButton = (products) => {
+    
     return (
       <TouchableOpacity
         style={[styles.swipeAction, styles.rightAction]}
         onPress={() => {
           openModal();
+          findProduct(products)
         }}
       >
         <FontAwesome name="trash" style={styles.deleteIcon} />
@@ -55,17 +55,11 @@ const AppContainer = () => {
   };
 
   const addNewProduct = () => {
-    setIsFormVisible(false);
     setSnackbarMessage("Produto adicionado com sucesso!");
     setVisibleSnackbar(true);
   };
 
-  const handleProductEdit = () => {
-    openForm();
-  };
-
   const updateProduct = () => {
-    setIsFormVisible(false);
     setSnackbarMessage("Produto atualizado com sucesso!");
     setVisibleSnackbar(true);
   };
@@ -89,7 +83,7 @@ const AppContainer = () => {
             <TouchableOpacity
               onPress={() => {
                 setSelectedProduct(false);
-                closeForm()
+                closeForm();
               }}
             >
               <FontAwesome name="angle-left" style={styles.actionIcon} />
@@ -99,35 +93,38 @@ const AppContainer = () => {
             </Text>
           </View>
           <ScrollView>
-          {selectedProduct ? <EditProductForm /> : <ProductForm />}
+            {selectedProduct ? <EditProductForm /> : <ProductForm />}
           </ScrollView>
         </View>
       ) : (
         <View>
           <Text style={styles.titulo}>Lista de Produtos</Text>
           <ScrollView>
-          {products.map((products, index) => (
-            <GestureHandlerRootView key={index}>
-              <Swipeable renderRightActions={() => renderApagarButton()}>
-                <TouchableOpacity
-                  style={styles.item}
-                  onPress={() => {
-                    handleProductEdit();
-                    setSelectedProduct(true);
-                  }}
-                >
-                  <Text style={styles.produto}>{products.nome}</Text>
-                  <Text style={getQtdColor(products.qtd)}>{products.qtd} unidades</Text>
-                </TouchableOpacity>
-              </Swipeable>
-              {isModalVisible && (
-                <AppModal
-                  visible={isModalVisible}
-                  onClose={closeModal}
-                  onConfirm={handleDeleteProduct}
-                />
-              )}
-            </GestureHandlerRootView>
+            {products.map((products, index) => (
+              <GestureHandlerRootView key={index}>
+                <Swipeable renderRightActions={() => renderApagarButton(products)}>
+                  <TouchableOpacity
+                    style={styles.item}
+                    onPress={() => {
+                      findProduct(products);
+                      setSelectedProduct(true);
+                      openForm();
+                    }}
+                  >
+                    <Text style={styles.produto}>{products.nome}</Text>
+                    <Text style={getQtdColor(products.qtd)}>
+                      {products.qtd} unidades
+                    </Text>
+                  </TouchableOpacity>
+                </Swipeable>
+                {isModalVisible && (
+                  <AppModal
+                    visible={isModalVisible}
+                    onClose={closeModal}
+                    onConfirm={handleDeleteProduct}
+                  />
+                )}
+              </GestureHandlerRootView>
             ))}
           </ScrollView>
         </View>
@@ -136,8 +133,10 @@ const AppContainer = () => {
         <FAB
           icon="plus"
           color="#0D5C63"
+          
           style={styles.fab}
-          onPress={() => openForm()}
+          onPress={() => {openForm();
+          setSelectedProduct(false)}}
         />
       ) : null}
       <View
