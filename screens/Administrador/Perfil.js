@@ -12,8 +12,22 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const Perfil = () => {
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
-  const { user, logout } = useContext(AuthContext)
+  const { user, logout, updateProfile, modalVisible, setModalVisible } = useContext(AuthContext)
+  const [nome, setNome] = useState(user.nome);
+  const [email, setEmail] = useState(user.email);
+  const [empresa, setEmpresa] = useState(user.empresa);
+  const [cnpj, setCnpj] = useState(user.cnpj);
+
+
+  const handleProfile = () => {
+    const dados = {
+      nome: nome,
+      email: email,
+      empresa: empresa,
+      cnpj: cnpj
+    }
+    updateProfile(dados)
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -32,6 +46,8 @@ const Perfil = () => {
           label="Nome"
           underlineColor="transparent"
           style={styles.input}
+          value={nome}
+          onChangeText={(text) => { setNome(text) }}
           placeholder="Nome"
           keyboardType="default"
         />
@@ -40,6 +56,8 @@ const Perfil = () => {
           label="E-mail"
           underlineColor="transparent"
           style={styles.input}
+          value={email}
+          onChangeText={(text) => { setEmail(text) }}
           placeholder="Email"
           keyboardType="email-address"
         />
@@ -48,6 +66,8 @@ const Perfil = () => {
           label="Empresa"
           underlineColor="transparent"
           style={styles.input}
+          value={empresa}
+          onChangeText={(text) => { setEmpresa(text) }}
           placeholder="Empresa"
           keyboardType="default"
         />
@@ -56,13 +76,15 @@ const Perfil = () => {
           label="CNPJ"
           underlineColor="transparent"
           style={styles.input}
+          value={cnpj}
+          onChangeText={(text) => { setCnpj(text) }}
           placeholder="CNPJ"
           keyboardType="default"
         />
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setModalVisible(true)}
+          onPress={() => handleProfile()}
         >
           <Text style={styles.buttonText}>Salvar perfil</Text>
         </TouchableOpacity>
