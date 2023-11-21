@@ -1,11 +1,10 @@
 import {
   View,
   ScrollView,
-  Text,
-  TextInput,
   Image,
   TouchableOpacity,
 } from "react-native";
+import { Text, TextInput, HelperText } from 'react-native-paper';
 import React, { useState, useContext } from "react";
 import styles from "../../styles/login/Style";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -15,7 +14,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { login } = useContext(AuthContext);
+  const { login, error } = useContext(AuthContext);
   return (
     <ScrollView style={styles.container}>
       <Image
@@ -30,21 +29,27 @@ const Login = ({ navigation }) => {
           Sistema de controle{"\n"}de estoque
         </Text>
 
+        <HelperText type="error" visible={true} style={styles.error}>{error}</HelperText>
+        
         <TextInput
+          label="E-mail"
           style={styles.input}
           placeholder="Email"
           value={email}
+          underlineColor="transparent"
           onChangeText={(text) => {
             setEmail(text);
           }}
-          keyboardType="email-adress"
+          keyboardType="email-address"
         />
         <TextInput
+          label="Senha"
+          underlineColor="transparent"
           style={styles.input}
           placeholder="Senha"
           value={senha}
           onChangeText={(text) => {
-            setSenha(Text);
+            setSenha(text);
           }}
           secureTextEntry
         />
@@ -62,6 +67,7 @@ const Login = ({ navigation }) => {
           <Text style={styles.buttonText}>Entrar</Text>
           <FontAwesome name="arrow-right" size={15} color="white" />
         </TouchableOpacity>
+
 
         <Text style={styles.titleCadastro}>É o seu primeiro acesso?</Text>
 

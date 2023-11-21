@@ -91,7 +91,8 @@ const ListaProdutosStyles = StyleSheet.create({
     fontSize: 20,
     borderBottomWidth: 1,
     borderColor: '#C8C7C7',
-    paddingVertical: 15,
+    //paddingVertical: 15,
+    marginBottom: 15,
   },
   button: {
     borderRadius: 50,

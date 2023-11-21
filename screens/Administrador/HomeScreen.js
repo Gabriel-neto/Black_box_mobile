@@ -14,11 +14,9 @@ import SnackBar from "./Includes/SnackBar";
 import { ProductsContext } from "../../contexts/ProductsContext";
 
 const AppContainer = () => {
-  const { products, form, openForm, closeForm, findProduct, removeProduct} =
+  const { products, form, openForm, closeForm, findProduct, removeProduct, visibleSnackbar, snackbarMessage, setVisibleSnackbar} =
     useContext(ProductsContext);
   const [isModalVisible, setIsModalVisible] = useState();
-  const [visibleSnackbar, setVisibleSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(false);
 
   //FUNÇÃO PARA ABRIR O MODAL
@@ -35,8 +33,6 @@ const AppContainer = () => {
   const handleDeleteProduct = () => {
     removeProduct(products)
     closeModal();
-    setSnackbarMessage("Produto excluído com sucesso!");
-    setVisibleSnackbar(true);
   };
 
   const renderApagarButton = (products) => {
@@ -52,16 +48,6 @@ const AppContainer = () => {
         <FontAwesome name="trash" style={styles.deleteIcon} />
       </TouchableOpacity>
     );
-  };
-
-  const addNewProduct = () => {
-    setSnackbarMessage("Produto adicionado com sucesso!");
-    setVisibleSnackbar(true);
-  };
-
-  const updateProduct = () => {
-    setSnackbarMessage("Produto atualizado com sucesso!");
-    setVisibleSnackbar(true);
   };
 
   //Muda a cor do QTD
