@@ -46,6 +46,8 @@ const ProductsProvider = ({ children }) => {
     setProducts((prevProducts) => {
       return prevProducts.filter((product) => product.nome !== products[indexProduct].nome);
     });
+    setSnackbarMessage("Produto apagado com sucesso!");
+    setVisibleSnackbar(true);
   };
 
   const reportProduct = () => {

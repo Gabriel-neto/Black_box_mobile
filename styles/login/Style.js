@@ -43,7 +43,7 @@ const LoginStyles = StyleSheet.create({
   },
   titleApresentacao: {
     fontSize: 25,
-    marginBottom: 35,
+    marginBottom: 15,
   },
   input: {
     width: '100%',
@@ -84,6 +84,11 @@ const LoginStyles = StyleSheet.create({
   recSenha: {
     textAlign: 'center',
     color: COLORS.primary,
+  },
+  error: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 20
   }
   
 });

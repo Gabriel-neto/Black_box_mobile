@@ -4,12 +4,9 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [error, setError] = useState();
 
-  const [user, setUser] = useState(
-    {
-      email: "",
-      logado: false,
-    });
+  const [user, setUser] = useState({ email: "", logado: false });
 
   const login = (email, senha) => {
     if (email !== "" && senha !== "") {
@@ -21,6 +18,9 @@ const AuthProvider = ({ children }) => {
           cnpj: "33.333.333/0001-33",
           empresa: "Blackbox"
         });
+      setError(null);
+    } else {
+      setError("E-mail ou senha invalidos");
     }
   };
 
@@ -45,7 +45,8 @@ const AuthProvider = ({ children }) => {
     logout,
     updateProfile,
     modalVisible,
-    setModalVisible
+    setModalVisible,
+    error
   };
   return (
     <AuthContext.Provider value={contexto}>{children}</AuthContext.Provider>

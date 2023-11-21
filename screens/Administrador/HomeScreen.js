@@ -33,8 +33,6 @@ const AppContainer = () => {
   const handleDeleteProduct = () => {
     removeProduct(products)
     closeModal();
-    setSnackbarMessage("Produto excluído com sucesso!");
-    setVisibleSnackbar(true);
   };
 
   const renderApagarButton = (products) => {
