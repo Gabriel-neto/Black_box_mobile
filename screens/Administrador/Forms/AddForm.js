@@ -1,11 +1,9 @@
 import React, { useState, useContext } from "react";
 import {
-  View,
   ScrollView,
-  Text,
-  TextInput,
   TouchableOpacity,
 } from "react-native";
+import { Text, TextInput } from 'react-native-paper';
 import styles from "../../../styles/administrador/ListaProdutos";
 import { ProductsContext } from "../../../contexts/ProductsContext";
 
@@ -24,23 +22,31 @@ const ProductForm = () => {
   return (
     <ScrollView>
       <TextInput
+        label="Nome do Produto"
         placeholder="Nome do Produto"
+        underlineColor="transparent"
         style={styles.input}
+        keyboardType="default"
         onChangeText={(text) => {
           setNome(text);
         }}
         value={nome}
       />
       <TextInput
+        label="Marca"
         placeholder="Marca"
+        underlineColor="transparent"
         style={styles.input}
+        keyboardType="default"
         onChangeText={(text) => {
           setMarca(text);
         }}
         value={marca}
       />
       <TextInput
+        label="Quantidade"
         placeholder="Quantidade"
+        underlineColor="transparent"
         style={styles.input}
         keyboardType="numeric"
         onChangeText={(text) => {
@@ -49,7 +55,9 @@ const ProductForm = () => {
         value={qtd}
       />
       <TextInput
+        label="Preço de Custo"
         placeholder="Preço de Custo"
+        underlineColor="transparent"
         style={styles.input}
         keyboardType="numeric"
         onChangeText={(text) => {
@@ -58,7 +66,9 @@ const ProductForm = () => {
         value={precoCusto}
       />
       <TextInput
+        label="Preço de venda"
         placeholder="Preço de Venda"
+        underlineColor="transparent"
         style={styles.input}
         keyboardType="numeric"
         onChangeText={(text) => {

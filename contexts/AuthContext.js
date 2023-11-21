@@ -10,9 +10,11 @@ const AuthProvider = ({ children }) => {
       setUser({ email, logado: true });
     }
   };
+  
   const logout = () => {
     setUser({ email: "", logado: false });
   };
+
   const contexto = {
     user,
     login,

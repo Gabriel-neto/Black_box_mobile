@@ -1,11 +1,10 @@
 import {
   View,
   ScrollView,
-  Text,
-  TextInput,
   Image,
   TouchableOpacity,
 } from "react-native";
+import { Text, TextInput } from 'react-native-paper';
 import React, { useState, useContext } from "react";
 import styles from "../../styles/login/Style";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -31,20 +30,24 @@ const Login = ({ navigation }) => {
         </Text>
 
         <TextInput
+          label="E-mail"
           style={styles.input}
           placeholder="Email"
           value={email}
+          underlineColor="transparent"
           onChangeText={(text) => {
             setEmail(text);
           }}
-          keyboardType="email-adress"
+          keyboardType="email-address"
         />
         <TextInput
+          label="Senha"
+          underlineColor="transparent"
           style={styles.input}
           placeholder="Senha"
           value={senha}
           onChangeText={(text) => {
-            setSenha(Text);
+            setSenha(text);
           }}
           secureTextEntry
         />
