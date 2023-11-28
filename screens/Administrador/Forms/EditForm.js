@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import {
-  View,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Text, TextInput } from 'react-native-paper';
+import { Text, TextInput, HelperText } from 'react-native-paper';
 import styles from "../../../styles/administrador/ListaProdutos";
 import { ProductsContext } from "../../../contexts/ProductsContext";
 
 const EditProductForm = () => {
-  const { products, indexProduct, updateProduct, closeForm } = useContext(ProductsContext);
+  const { products, indexProduct, updateProduct, closeForm, error } = useContext(ProductsContext);
 
   const [nome, setNome] = useState(products[indexProduct].nome)
   const [marca, setMarca] = useState(products[indexProduct].marca);
@@ -24,7 +24,9 @@ const EditProductForm = () => {
   };
 
   return (
-    <View>
+    <ScrollView>
+      <HelperText type="error" visible={true} style={styles.error}>{error}</HelperText>
+
       <TextInput
         label="Nome do Produto"
         underlineColor="transparent"
@@ -77,7 +79,7 @@ const EditProductForm = () => {
         onPress={() => { handleSubmit() }}>
         <Text style={styles.buttonText}>SALVAR</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 

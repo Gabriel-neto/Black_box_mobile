@@ -108,6 +108,11 @@ const ListaProdutosStyles = StyleSheet.create({
     color: '#FFF',
     fontWeight: '600',
   },
+  error: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 20
+  },
 });
 
 export default ListaProdutosStyles;
