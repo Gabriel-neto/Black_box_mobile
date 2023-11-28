@@ -69,10 +69,14 @@ const LoginStyles = StyleSheet.create({
     marginBottom: 40,
   },
   buttonTextSair: {
-    
     color: COLORS.textLight,
     fontSize: 18,
   },
+  error: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 20
+  }
 });
 
 export default LoginStyles;
