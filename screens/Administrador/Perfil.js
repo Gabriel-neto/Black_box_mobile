@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { View, ScrollView, Image, TouchableOpacity } from "react-native";
-import { Text, TextInput } from 'react-native-paper';
+import { Text, TextInput, HelperText } from 'react-native-paper';
 
 import styles from "../../styles/perfil/Style";
 import { useNavigation } from "@react-navigation/native";
@@ -12,7 +12,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const Perfil = () => {
   const navigation = useNavigation();
-  const { user, logout, updateProfile, modalVisible, setModalVisible } = useContext(AuthContext)
+  const { user, logout, updateProfile, modalVisible, setModalVisible, error } = useContext(AuthContext)
   const [nome, setNome] = useState(user.nome);
   const [email, setEmail] = useState(user.email);
   const [empresa, setEmpresa] = useState(user.empresa);
@@ -40,7 +40,9 @@ const Perfil = () => {
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title}>Bem-vindo {user.email}</Text>
+        <Text style={styles.title}>Bem-vindo {user.nome}</Text>
+
+        <HelperText type="error" visible={true} style={styles.error}>{error}</HelperText>
 
         <TextInput
           label="Nome"
