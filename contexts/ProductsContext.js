@@ -8,6 +8,7 @@ const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [indexProduct, setIndexProduct] = useState();
   const [form, setForm] = useState(false);
+  const [error, setError] = useState();
   const [reportValues, setReportValues] = useState({ qtdTotal: 0, custoTotal: 0, lucroPrevisto: 0, lucroVenda: 0 });
 
 
@@ -19,13 +20,18 @@ const ProductsProvider = ({ children }) => {
   };
 
   const addProduct = (nome, qtd, marca, precoCusto, precoVenda) => {
-    if (nome != "" && qtd.length != 0) {
-      const newProduct = { nome, qtd, marca, precoCusto, precoVenda };
-      setProducts([...products, newProduct]);
-      closeForm();
-      setSnackbarMessage("Produto adicionado com sucesso!");
-      setVisibleSnackbar(true);
+    const errorMessage = "Preencha todos os dados corretamente.";
+  
+    if (!nome || isNaN(qtd) || qtd <= 0 || isNaN(precoCusto) || precoCusto <= 0 || isNaN(precoVenda) || precoVenda <= 0) {
+      setError(errorMessage);
+      return;
     }
+  
+    const newProduct = { nome, qtd, marca, precoCusto, precoVenda };
+    setProducts([...products, newProduct]);
+    closeForm();
+    setSnackbarMessage("Produto adicionado com sucesso!");
+    setVisibleSnackbar(true);
   };
 
   const findProduct = (product) => {
@@ -34,6 +40,13 @@ const ProductsProvider = ({ children }) => {
   };
 
   const updateProduct = (nome, marca, qtd, precoCusto, precoVenda) => {
+    const errorMessage = "Preencha todos os dados corretamente.";
+  
+    if (!nome || isNaN(qtd) || qtd <= 0 || isNaN(precoCusto) || precoCusto <= 0 || isNaN(precoVenda) || precoVenda <= 0) {
+      setError(errorMessage);
+      return;
+    }
+  
     const updatedProduct = { nome, marca, qtd, precoCusto, precoVenda };
     const updatedProducts = [...products];
     updatedProducts[indexProduct] = updatedProduct;
@@ -78,7 +91,8 @@ const ProductsProvider = ({ children }) => {
     reportValues,
     visibleSnackbar,
     snackbarMessage,
-    setVisibleSnackbar
+    setVisibleSnackbar,
+    error
   };
   return (
     <ProductsContext.Provider value={contextoProduto}>

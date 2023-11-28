@@ -75,6 +75,11 @@ const DetailsScreen = StyleSheet.create({
       fontSize: 16,
       color: '#4B4848',
       fontWeight: '300',
+    },
+    error: {
+      textAlign: 'center',
+      fontSize: 20,
+      marginBottom: 20
     }
 });
 

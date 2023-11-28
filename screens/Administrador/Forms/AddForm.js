@@ -3,12 +3,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Text, TextInput } from 'react-native-paper';
+import { Text, TextInput, HelperText } from 'react-native-paper';
 import styles from "../../../styles/administrador/ListaProdutos";
 import { ProductsContext } from "../../../contexts/ProductsContext";
 
 const ProductForm = () => {
-  const { addProduct, reportProduct } = useContext(ProductsContext);
+  const { addProduct, reportProduct, error } = useContext(ProductsContext);
   const [nome, setNome] = useState("");
   const [marca, setMarca] = useState("");
   const [qtd, setQtd] = useState();
@@ -16,11 +16,13 @@ const ProductForm = () => {
   const [precoVenda, setPrecoVenda] = useState(0);
 
   const handleSubmit = () => {
-    addProduct(nome, qtd, marca, precoCusto, precoVenda), reportProduct(), setNome(""), setQtd("");
+    addProduct(nome, qtd, marca, precoCusto, precoVenda), reportProduct();
   };
 
   return (
     <ScrollView>
+      <HelperText type="error" visible={true} style={styles.error}>{error}</HelperText>
+
       <TextInput
         label="Nome do Produto"
         placeholder="Nome do Produto"
