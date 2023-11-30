@@ -65,6 +65,11 @@ const LoginStyles = StyleSheet.create({
     marginTop: 20,
     paddingVertical: 10,
   },
+  error: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 20,
+  }
 });
 
 export default LoginStyles;

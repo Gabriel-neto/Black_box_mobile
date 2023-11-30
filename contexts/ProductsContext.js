@@ -11,7 +11,6 @@ const ProductsProvider = ({ children }) => {
   const [error, setError] = useState();
   const [reportValues, setReportValues] = useState({ qtdTotal: 0, custoTotal: 0, lucroPrevisto: 0, lucroVenda: 0 });
 
-
   const openForm = () => {
     setForm(true);
   };

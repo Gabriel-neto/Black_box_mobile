@@ -1,24 +1,19 @@
-import {
-  View,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Text, TextInput, HelperText } from 'react-native-paper';
-import React, { useState, useContext } from "react";
-import styles from "../../styles/login/Style";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { AuthContext } from "../../contexts/AuthContext";
+import React, { useState, useContext } from 'react';
+import styles from '../../styles/login/Style';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { AuthContext } from '../../contexts/AuthContext';
 
 // component
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
   const { login, error } = useContext(AuthContext);
   return (
     <ScrollView style={styles.container}>
       <Image
-        source={require("../../assets/img/login/login_topo_cinza.png")}
+        source={require('../../assets/img/login/login_topo_cinza.png')}
         style={styles.image}
       />
       <View style={styles.content}>
@@ -26,11 +21,13 @@ const Login = ({ navigation }) => {
         <Text style={styles.titleBlackbox}>Blackbox!</Text>
 
         <Text style={styles.titleApresentacao}>
-          Sistema de controle{"\n"}de estoque
+          Sistema de controle{'\n'}de estoque
         </Text>
 
-        <HelperText type="error" visible={true} style={styles.error}>{error}</HelperText>
-        
+        <HelperText type="error" visible={true} style={styles.error}>
+          {error}
+        </HelperText>
+
         <TextInput
           label="E-mail"
           style={styles.input}
@@ -53,7 +50,7 @@ const Login = ({ navigation }) => {
           }}
           secureTextEntry
         />
-        <TouchableOpacity onPress={() => navigation.navigate("RecuperarSenha")}>
+        <TouchableOpacity onPress={() => navigation.navigate('RecuperarSenha')}>
           <Text style={styles.recSenha}>Esqueci minha senha</Text>
         </TouchableOpacity>
 
@@ -61,17 +58,15 @@ const Login = ({ navigation }) => {
           style={styles.button}
           onPress={() => {
             login(email, senha);
-            console.log(login.email)
-          }}
-        >
+            console.log(login.email);
+          }}>
           <Text style={styles.buttonText}>Entrar</Text>
           <FontAwesome name="arrow-right" size={15} color="white" />
         </TouchableOpacity>
 
-
         <Text style={styles.titleCadastro}>É o seu primeiro acesso?</Text>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
           <Text style={styles.titleCadastro1}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>
