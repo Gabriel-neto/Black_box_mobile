@@ -1,15 +1,42 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect, useContext } from 'react';
+import {
+  listProducts,
+  incluirProduto,
+  editarProduto,
+  listarPeloId,
+  deletarProduto
+} from '../service/MobileService';
+import { AuthContext } from "./AuthContext";
 
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
-  const [snackbarMessage, setSnackbarMessage] = useState(""); //SNACKBAR
+  const { user } = useContext(AuthContext)
+  const [snackbarMessage, setSnackbarMessage] = useState(''); //SNACKBAR
   const [visibleSnackbar, setVisibleSnackbar] = useState(false); //SNACKBAR
   const [products, setProducts] = useState([]);
   const [indexProduct, setIndexProduct] = useState();
   const [form, setForm] = useState(false);
   const [error, setError] = useState();
-  const [reportValues, setReportValues] = useState({ qtdTotal: 0, custoTotal: 0, lucroPrevisto: 0, lucroVenda: 0 });
+  const [reportValues, setReportValues] = useState({
+    qtdTotal: 0,
+    custoTotal: 0,
+    lucroPrevisto: 0,
+    lucroVenda: 0,
+  });
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const getProducts = await listProducts(user.localId);
+        setProducts(getProducts);
+      } catch (error) {
+        console.error("Erro ao listar produtos:", error);
+        setError(error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const openForm = () => {
     setForm(true);
@@ -18,19 +45,38 @@ const ProductsProvider = ({ children }) => {
     setForm(false);
   };
 
-  const addProduct = (nome, qtd, marca, precoCusto, precoVenda) => {
-    const errorMessage = "Preencha todos os dados corretamente.";
-  
-    if (!nome || isNaN(qtd) || qtd <= 0 || isNaN(precoCusto) || precoCusto <= 0 || isNaN(precoVenda) || precoVenda <= 0) {
+
+  const addProduct = async (nome, qtd, marca, precoCusto, precoVenda) => {
+    const errorMessage = 'Preencha todos os dados corretamente.';
+
+    if (
+      !nome ||
+      isNaN(qtd) ||
+      qtd <= 0 ||
+      isNaN(precoCusto) ||
+      precoCusto <= 0 ||
+      isNaN(precoVenda) ||
+      precoVenda <= 0
+    ) {
       setError(errorMessage);
       return;
     }
-  
-    const newProduct = { nome, qtd, marca, precoCusto, precoVenda };
-    setProducts([...products, newProduct]);
-    closeForm();
-    setSnackbarMessage("Produto adicionado com sucesso!");
-    setVisibleSnackbar(true);
+    try {
+      const newProduct = await incluirProduto(
+        nome,
+        qtd,
+        marca,
+        precoCusto,
+        precoVenda,
+        user.localId
+      );
+      setProducts([...products, newProduct]);
+      closeForm();
+      setSnackbarMessage('Produto adicionado com sucesso!');
+      setVisibleSnackbar(true);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const findProduct = (product) => {
@@ -38,27 +84,50 @@ const ProductsProvider = ({ children }) => {
     setIndexProduct(index);
   };
 
-  const updateProduct = (nome, marca, qtd, precoCusto, precoVenda) => {
-    const errorMessage = "Preencha todos os dados corretamente.";
-  
-    if (!nome || isNaN(qtd) || qtd <= 0 || isNaN(precoCusto) || precoCusto <= 0 || isNaN(precoVenda) || precoVenda <= 0) {
+  const buscar = async (id) => {
+    try {
+      return await listarPeloId(id);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const updateProduct = (id, nome, marca, qtd, precoCusto, precoVenda) => {
+    const errorMessage = 'Preencha todos os dados corretamente.';
+
+    if (
+      !nome ||
+      isNaN(qtd) ||
+      qtd <= 0 ||
+      isNaN(precoCusto) ||
+      precoCusto <= 0 ||
+      isNaN(precoVenda) ||
+      precoVenda <= 0
+    ) {
       setError(errorMessage);
       return;
     }
-  
-    const updatedProduct = { nome, marca, qtd, precoCusto, precoVenda };
-    const updatedProducts = [...products];
-    updatedProducts[indexProduct] = updatedProduct;
-    setProducts(updatedProducts);
-    setSnackbarMessage("Produto editado com sucesso!");
-    setVisibleSnackbar(true);
+    try {
+      const updatedProduct = { id, nome, marca, qtd, precoCusto, precoVenda };
+      const updatedProducts = [...products];
+      editarProduto(id, updatedProduct, user.localId)
+      updatedProducts[indexProduct] = updatedProduct;
+      setProducts(updatedProducts);
+      setSnackbarMessage('Produto editado com sucesso!');
+      setVisibleSnackbar(true);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const removeProduct = (products) => {
-    setProducts((prevProducts) => {
-      return prevProducts.filter((product) => product.nome !== products[indexProduct].nome);
-    });
-    setSnackbarMessage("Produto apagado com sucesso!");
+    const filteredProducts = products.filter(
+      (product) => product.id !== products[indexProduct].id
+    );
+    
+    setProducts(filteredProducts);
+    deletarProduto(products[indexProduct].id, user.localId)
+    setSnackbarMessage('Produto apagado com sucesso!');
     setVisibleSnackbar(true);
   };
 
@@ -69,13 +138,20 @@ const ProductsProvider = ({ children }) => {
     let lucroVenda = 0;
     products.forEach((product) => {
       qtdTotal += parseInt(product.qtd, 10);
-      custoTotal += (parseFloat(product.precoCusto) * parseInt(product.qtd));
-      lucroPrevisto += (((parseFloat(product.precoVenda)) - (parseFloat(product.precoCusto))) * parseInt(product.qtd))
-      lucroVenda += (lucroPrevisto / parseInt(product.qtd))
+      custoTotal += parseFloat(product.precoCusto) * parseInt(product.qtd);
+      lucroPrevisto +=
+        (parseFloat(product.precoVenda) - parseFloat(product.precoCusto)) *
+        parseInt(product.qtd);
+      lucroVenda += lucroPrevisto / parseInt(product.qtd);
     });
-    setReportValues({ ...reportValues, qtdTotal: qtdTotal, custoTotal: custoTotal, lucroPrevisto: lucroPrevisto, lucroVenda: lucroVenda });
-
-  }
+    setReportValues({
+      ...reportValues,
+      qtdTotal: qtdTotal,
+      custoTotal: custoTotal,
+      lucroPrevisto: lucroPrevisto,
+      lucroVenda: lucroVenda,
+    });
+  };
   const contextoProduto = {
     form,
     openForm,
@@ -91,7 +167,8 @@ const ProductsProvider = ({ children }) => {
     visibleSnackbar,
     snackbarMessage,
     setVisibleSnackbar,
-    error
+    buscar,
+    error,
   };
   return (
     <ProductsContext.Provider value={contextoProduto}>

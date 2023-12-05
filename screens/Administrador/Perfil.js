@@ -41,6 +41,8 @@ const Perfil = () => {
 
       <View style={styles.content}>
         <Text style={styles.title}>Bem-vindo {user.nome}</Text>
+        <Text style={styles.title}>E-mail: {email}</Text>
+        
 
         <HelperText type="error" visible={true} style={styles.error}>{error}</HelperText>
 
@@ -52,16 +54,6 @@ const Perfil = () => {
           onChangeText={(text) => { setNome(text) }}
           placeholder="Nome"
           keyboardType="default"
-        />
-
-        <TextInput
-          label="E-mail"
-          underlineColor="transparent"
-          style={styles.input}
-          value={email}
-          onChangeText={(text) => { setEmail(text) }}
-          placeholder="Email"
-          keyboardType="email-address"
         />
 
         <TextInput

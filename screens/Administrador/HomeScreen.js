@@ -14,10 +14,11 @@ import SnackBar from "./Includes/SnackBar";
 import { ProductsContext } from "../../contexts/ProductsContext";
 
 const AppContainer = () => {
-  const { products, form, openForm, closeForm, findProduct, removeProduct, visibleSnackbar, snackbarMessage, setVisibleSnackbar} =
+  const { products, form, openForm, closeForm, findProduct, removeProduct, visibleSnackbar, snackbarMessage, setVisibleSnackbar, listProduct} =
     useContext(ProductsContext);
   const [isModalVisible, setIsModalVisible] = useState();
   const [selectedProduct, setSelectedProduct] = useState(false);
+
 
   //FUNÇÃO PARA ABRIR O MODAL
   const openModal = () => {

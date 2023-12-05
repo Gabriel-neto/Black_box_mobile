@@ -9,7 +9,7 @@ import { ProductsContext } from "../../../contexts/ProductsContext";
 
 const EditProductForm = () => {
   const { products, indexProduct, updateProduct, closeForm, error } = useContext(ProductsContext);
-
+  const idProduct = products[indexProduct].id
   const [nome, setNome] = useState(products[indexProduct].nome)
   const [marca, setMarca] = useState(products[indexProduct].marca);
   const [qtd, setQtd] = useState(products[indexProduct].qtd)
@@ -19,7 +19,7 @@ const EditProductForm = () => {
 
 
   const handleSubmit = () => {
-    updateProduct(nome, marca, qtd, precoCusto, precoVenda)
+    updateProduct(idProduct, nome, marca, qtd, precoCusto, precoVenda)
     closeForm()
   };
 
