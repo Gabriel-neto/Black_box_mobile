@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const BASE_URL = 'https://black-box-69d64-default-rtdb.firebaseio.com';
 
-const listProducts = async () => {
+const listProducts = async (userId) => {
   try {
     const produtos = [];
-    const response = await axios.get(`${BASE_URL}/produtos.json`);
+    const response = await axios.get(`${BASE_URL}/${userId}.json`);
     for (key in response.data) {
       produtos.push({ id: key, ...response.data[key] });
     }
@@ -24,7 +24,7 @@ const listarPeloId = async (id) => {
   }
 };
 
-const incluirProduto = async (nome, qtd, marca, precoCusto, precoVenda) => {
+const incluirProduto = async (nome, qtd, marca, precoCusto, precoVenda, userId) => {
   try {
     const dados = {
       nome,
@@ -33,7 +33,7 @@ const incluirProduto = async (nome, qtd, marca, precoCusto, precoVenda) => {
       precoCusto,
       precoVenda,
     };
-    const response = await axios.post(`${BASE_URL}/produtos.json`, dados);
+    const response = await axios.post(`${BASE_URL}/${userId}.json`, dados);
     return {
       id: response.data.key,
       nome,
@@ -47,18 +47,18 @@ const incluirProduto = async (nome, qtd, marca, precoCusto, precoVenda) => {
   }
 };
 
-const editarProduto = async (id, dados) => {
+const editarProduto = async (id, dados, userId) => {
   try {
-    const response = await axios.put(`${BASE_URL}/produtos/${id}.json`, dados);
+    const response = await axios.put(`${BASE_URL}/${userId}/${id}.json`, dados);
     return { id, ...response.data };
   } catch (error) {
     console.log(error);
   }
 };
 
-const deletarProduto = async (id) => {
+const deletarProduto = async (id, userId) => {
     try {
-      await axios.delete(`${BASE_URL}/produtos/${id}.json`);
+      await axios.delete(`${BASE_URL}/${userId}/${id}.json`);
     } catch (error) {
       console.log(error);
     }
