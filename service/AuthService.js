@@ -31,7 +31,6 @@ const signUp = async (displayName, email, password) => {
     });
 
     await update(register.data.idToken, displayName);
-    console.log(register)
     return register.data
   } catch (e) {
     if (e.response.data.error.message === 'EMAIL_EXISTS') {

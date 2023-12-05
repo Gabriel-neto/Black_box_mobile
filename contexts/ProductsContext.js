@@ -72,8 +72,11 @@ const ProductsProvider = ({ children }) => {
       );
       setProducts([...products, newProduct]);
       closeForm();
+      const getProducts = await listProducts(user.localId);
+      setProducts(getProducts);
       setSnackbarMessage('Produto adicionado com sucesso!');
       setVisibleSnackbar(true);
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -92,7 +95,7 @@ const ProductsProvider = ({ children }) => {
     }
   };
 
-  const updateProduct = (id, nome, marca, qtd, precoCusto, precoVenda) => {
+  const updateProduct = async (id, nome, marca, qtd, precoCusto, precoVenda) => {
     const errorMessage = 'Preencha todos os dados corretamente.';
 
     if (
@@ -110,7 +113,9 @@ const ProductsProvider = ({ children }) => {
     try {
       const updatedProduct = { id, nome, marca, qtd, precoCusto, precoVenda };
       const updatedProducts = [...products];
-      editarProduto(id, updatedProduct, user.localId)
+      await editarProduto(id, updatedProduct, user.localId)
+      const getProducts = await listProducts(user.localId);
+      setProducts(getProducts);
       updatedProducts[indexProduct] = updatedProduct;
       setProducts(updatedProducts);
       setSnackbarMessage('Produto editado com sucesso!');
@@ -120,13 +125,13 @@ const ProductsProvider = ({ children }) => {
     }
   };
 
-  const removeProduct = (products) => {
+  const removeProduct = async (products) => {
     const filteredProducts = products.filter(
       (product) => product.id !== products[indexProduct].id
     );
     
     setProducts(filteredProducts);
-    deletarProduto(products[indexProduct].id, user.localId)
+    await deletarProduto(products[indexProduct].id, user.localId)
     setSnackbarMessage('Produto apagado com sucesso!');
     setVisibleSnackbar(true);
   };

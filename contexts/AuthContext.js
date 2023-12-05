@@ -90,16 +90,19 @@ const AuthProvider = ({ children }) => {
     // Se todas as validações passarem, registre o usuário
     try {
       const register = await signUp(nome, email, senha)
-      setUser({
+
+      setUser((prevUser) => ({
+        ...prevUser,
         localId: register.localId,
         idToken: register.idToken,
         email: email,
-        senha: senha,
-        logado: true,
         nome: nome,
+        logado: true,
         cnpj: '33.333.333/0001-33',
         empresa: 'Blackbox',
-      });
+      }));
+
+      console.log(user)
       setError(null);
     } catch (e) {
       setError(e.message);
