@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import {
   listProducts,
   incluirProduto,
@@ -6,10 +6,12 @@ import {
   listarPeloId,
   deletarProduto
 } from '../service/MobileService';
+import { AuthContext } from "./AuthContext";
 
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
+  const { user } = useContext(AuthContext)
   const [snackbarMessage, setSnackbarMessage] = useState(''); //SNACKBAR
   const [visibleSnackbar, setVisibleSnackbar] = useState(false); //SNACKBAR
   const [products, setProducts] = useState([]);
@@ -26,7 +28,7 @@ const ProductsProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const getProducts = await listProducts();
+        const getProducts = await listProducts(user.localId);
         setProducts(getProducts);
       } catch (error) {
         console.error("Erro ao listar produtos:", error);
@@ -65,7 +67,8 @@ const ProductsProvider = ({ children }) => {
         qtd,
         marca,
         precoCusto,
-        precoVenda
+        precoVenda,
+        user.localId
       );
       setProducts([...products, newProduct]);
       closeForm();
@@ -107,7 +110,7 @@ const ProductsProvider = ({ children }) => {
     try {
       const updatedProduct = { id, nome, marca, qtd, precoCusto, precoVenda };
       const updatedProducts = [...products];
-      editarProduto(id, updatedProduct)
+      editarProduto(id, updatedProduct, user.localId)
       updatedProducts[indexProduct] = updatedProduct;
       setProducts(updatedProducts);
       setSnackbarMessage('Produto editado com sucesso!');
@@ -123,7 +126,7 @@ const ProductsProvider = ({ children }) => {
     );
     
     setProducts(filteredProducts);
-    deletarProduto(products[indexProduct].id)
+    deletarProduto(products[indexProduct].id, user.localId)
     setSnackbarMessage('Produto apagado com sucesso!');
     setVisibleSnackbar(true);
   };

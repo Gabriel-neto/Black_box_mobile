@@ -1,4 +1,9 @@
 import { createContext, useState } from 'react';
+import {
+  signIn,
+  signUp,
+  updatePerfil
+} from '../service/AuthService';
 
 const AuthContext = createContext();
 
@@ -7,13 +12,15 @@ const AuthProvider = ({ children }) => {
   const [error, setError] = useState();
 
   const [user, setUser] = useState({
+    localId: '',
+    idToken: '',
     email: '',
     logado: false,
     senha: '',
     nome: '',
   });
 
-  const login = (email, senha) => {
+  const login = async (email, senha) => {
     const errorMessage = 'E-mail e senha é obrigatório.';
     const invalidEmail = 'E-mail inválido.';
 
@@ -29,24 +36,27 @@ const AuthProvider = ({ children }) => {
       return;
     }
 
-    const isPasswordValid = senha === user.senha;
-    const isEmailValid = email === user.email;
-
-    if (isPasswordValid && isEmailValid) {
+    try {
+      const signUser = await signIn(email, senha)
       setUser((prevUser) => ({
         ...prevUser,
+        localId: signUser.localId,
+        idToken: signUser.idToken,
         email: email,
+        nome: signUser.displayName,
         logado: true,
         cnpj: '33.333.333/0001-33',
         empresa: 'Blackbox',
       }));
       setError(null);
-    } else {
-      setError(errorMessage);
+
+    } catch (e) {
+      setError(e.message);
     }
+
   };
 
-  const register = (nome, email, senha, confirmeSenha) => {
+  const register = async (nome, email, senha, confirmeSenha) => {
     const errorMessage = {
       missingFields: 'Preencha todos os dados corretamente',
       passwordMismatch: 'As senhas não conferem.',
@@ -78,15 +88,22 @@ const AuthProvider = ({ children }) => {
     }
 
     // Se todas as validações passarem, registre o usuário
-    setUser({
-      email: email,
-      senha: senha,
-      logado: true,
-      nome: nome,
-      cnpj: '33.333.333/0001-33',
-      empresa: 'Blackbox',
-    });
-    setError(null);
+    try {
+      const register = await signUp(nome, email, senha)
+      setUser({
+        localId: register.localId,
+        idToken: register.idToken,
+        email: email,
+        senha: senha,
+        logado: true,
+        nome: nome,
+        cnpj: '33.333.333/0001-33',
+        empresa: 'Blackbox',
+      });
+      setError(null);
+    } catch (e) {
+      setError(e.message);
+    }
   };
 
   const logout = () => {
@@ -96,7 +113,7 @@ const AuthProvider = ({ children }) => {
     }));
   };
 
-  const updateProfile = (dados) => {
+  const updateProfile = async (dados) => {
     const errorMessage = 'Preencha todos os dados corretamente.';
     const invalidEmail = 'E-mail invalido.';
 
@@ -111,15 +128,20 @@ const AuthProvider = ({ children }) => {
       return;
     }
 
-    setUser((prevUser) => ({
-      ...prevUser,
-      email: dados.email,
-      logado: true,
-      nome: dados.nome,
-      cnpj: dados.cnpj,
-      empresa: dados.empresa,
-    }));
-    setModalVisible(true);
+    try {
+      await updatePerfil(user.idToken, dados.email, dados.nome)
+      setUser((prevUser) => ({
+        ...prevUser,
+        email: dados.email,
+        logado: true,
+        nome: dados.nome,
+        cnpj: dados.cnpj,
+        empresa: dados.empresa,
+      }));
+      setModalVisible(true);
+    } catch (e) {
+      setError(e.message);
+    }
   };
 
   const emailRecuperaSenha = (recuperaEmail) => {
