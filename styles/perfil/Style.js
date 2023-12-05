@@ -33,7 +33,7 @@ const LoginStyles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 40,
+    marginBottom: 5,
   },
   input: {
     width: '100%',
@@ -75,7 +75,7 @@ const LoginStyles = StyleSheet.create({
   error: {
     textAlign: 'center',
     fontSize: 20,
-    marginBottom: 20
+    marginBottom: 10
   }
 });
 
